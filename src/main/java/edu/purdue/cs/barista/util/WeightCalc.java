@@ -2,12 +2,13 @@ package edu.purdue.cs.barista.util;
 
 import edu.purdue.cs.barista.TestCase;
 import edu.purdue.cs.barista.TestSuite;
-import org.reflections.Reflections;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import org.reflections.Reflections;
 
 /**
  * The {@link WeightCalc} class checks that all test cases total
@@ -53,7 +54,7 @@ public final class WeightCalc {
      * @param packageName the package to search
      * @return {@code true} if the tests total to 100.0, {@code false} otherwise
      */
-     static boolean totalsCorrectly(String packageName) {
+    static boolean totalsCorrectly(String packageName) {
         Reflections reflect = new Reflections(packageName);
         Set<Class<?>> testSuites = reflect.getTypesAnnotatedWith(TestSuite.class);
         return calculateTotal(testSuites) == 100.0;
@@ -97,4 +98,5 @@ public final class WeightCalc {
             .mapToDouble(TestCase::points)
             .sum();
     }
+
 }
