@@ -6,7 +6,7 @@
 
   <groupId>edu.purdue.cs</groupId>
   <artifactId>barista</artifactId>
-  <version>1.3.1</version>
+  <version>2.0-SNAPSHOT</version>
 
   <name>Barista</name>
   <description>Grading package for Java Gradescope assignments.</description>
@@ -30,7 +30,7 @@
     <developer>
       <name>Andrew Davis</name>
       <email>drew@drewdavis.me</email>
-      <url>https://github.com/drewsdav</url>
+      <url>https://github.com/drewdavis21</url>
     </developer>
   </developers>
 
