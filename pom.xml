@@ -91,11 +91,6 @@
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
           <appendAssemblyId>false</appendAssemblyId>
-          <archive>
-            <manifest>
-              <mainClass>edu.purdue.cs.barista.RunTests</mainClass>
-            </manifest>
-          </archive>
         </configuration>
         <executions>
           <execution>
