@@ -5,32 +5,58 @@ package edu.purdue.cs.barista.util;
  * test suites.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.0, 04/29/2020
+ * @version 2.0, 05/08/2020
  * @since 1.3
  */
 public class SetupUtilities {
 
     /**
      * Returns the package to test. This is determined by
-     * the {@code environment} system property. If the
-     * {@code environment} property is set to {@code development},
+     * the {@code env} system property.
+     * <p>
+     * If the {@code env} property is set to {@code dev},
      * the solution package, defined by the {@code solution.package.name}
      * system property, is returned, followed by a terminating period.
-     * If the {@code environment} property is set to
-     * {@code production} or anything but {@code development},
-     * an empty {@link String} is returned, signifying the
+     * If the {@code solution.package.name} property is not set,
+     * the method returns {@code solution.}, including the terminating
+     * period.
+     * <p>
+     * If the {@code env} property is set to {@code prod} or anything
+     * but {@code dev}, the student package, defined by the
+     * {@code student.package.name} system property, is returned, followed
+     * by a terminating period. If the {@code student.package.name} property
+     * is not set, the method returns an empty string, signifying the
      * {@code default} package.
+     * <p>
+     * This method's main purpose is to determine the package name for the
+     * classes you are testing when writing tests that use {@link java.lang.reflect}.
+     * <br><br><p>
+     * <b>Example:</b>
+     * <p>
+     * If your students are uploading Java code that rests in the {@code default}
+     * package (i.e., there is no package statement in the file), then you do not
+     * need to do anything.
+     * If your students are uploading Java code that is inside of a package, set
+     * the {@code student.package.name} to the entire package name, not including
+     * a terminating period.
+     * If you want to test your solution, set the {@code env} property to {@code dev}
+     * and set the {@code solution.package.name} property to the package name of your
+     * solution.
      *
      * @return the name of the package to test
      */
     public static String getPackageToTest() {
-        String environment = System.getProperty("environment", "production");
+        String environment = System.getProperty("env", "prod");
 
-        if (environment.equals("development")) {
+        if (environment.equals("dev")) {
             String solutionPackage = System.getProperty("solution.package.name", "solution");
             return solutionPackage + ".";
         } else {
-            return "";
+            String studentPackage = System.getProperty("student.package.name", "");
+            if (!studentPackage.isEmpty()) {
+                studentPackage += ".";
+            }
+            return studentPackage;
         }
     }
 
