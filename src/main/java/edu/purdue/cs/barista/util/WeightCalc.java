@@ -13,10 +13,11 @@ import org.reflections.Reflections;
 /**
  * The {@link WeightCalc} class checks that all test cases total
  * to {@code 100.0}. If the test cases do not total to {@code 100.0},
- * Gradescope could give students an incorrect grade.
+ * Gradescope could give students an incorrect grade, depending
+ * on your configuration.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.3.1, 03/26/2020
+ * @version 2.0, 05/10/2020
  * @since 1.1
  */
 public final class WeightCalc {
@@ -34,12 +35,17 @@ public final class WeightCalc {
     }
 
     /**
-     * Checks that all test cases in default package total to {@code 100.0}.
+     * Checks that all {@link TestCase}s in a given package total to {@code 100.0}.
+     * Totals test weights for {@link TestSuite} classes inside of the package given by the
+     * {@code test.package.name} system property. If this property is not set,
+     * the {@code default} package is used to calculate test weights.
      *
      * @param args has no effect
      */
     public static void main(String[] args) {
-        if (totalsCorrectly("")) {
+        String testPackage = System.getProperty("test.package.name", "");
+
+        if (totalsCorrectly(testPackage)) {
             System.out.printf("%s%s%s\n", ANSI_GREEN, SUCCESS_MESSAGE, ANSI_RESET);
             System.exit(0);
         } else {
