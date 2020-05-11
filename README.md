@@ -22,7 +22,7 @@ public class HelloWorldTests {
 }
 ```
 
-That's a test suite written using Barista. Pretty simple, right? Best part, just run the `RunTests.main()` method to run all `@TestSuite` classes and automatically print the results in JSON.
+That's a test suite written using Barista. Pretty simple, right? Call the `GradescopeGrader.run()` method to run your test suites and automatically print the results in JSON.
 
 Want more customization? Feel free to make your own test runner and create a new `GradescopeListener` object to run the tests.
 
