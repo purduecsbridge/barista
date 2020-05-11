@@ -8,7 +8,8 @@ import java.lang.annotation.Target;
 /**
  * The {@link TestCase} annotation allows test methods to be used
  * in Gradescope testing. It attaches to JUnit test methods and forwards
- * the results and the annotation parameters to Gradescope.
+ * the results and the annotation parameters to Gradescope. {@link TestCase}
+ * methods should be contained in a {@link TestSuite} class.
  * <p>
  * The following optional parameters may be used:
  * <ul>
