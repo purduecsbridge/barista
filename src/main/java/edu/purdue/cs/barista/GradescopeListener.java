@@ -1,5 +1,8 @@
 package edu.purdue.cs.barista;
 
+import com.github.tkutche1.jgrade.gradedtest.GradedTestListener;
+import com.github.tkutche1.jgrade.gradedtest.GradedTestResult;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -7,9 +10,6 @@ import java.util.List;
 
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
-
-import com.github.tkutche1.jgrade.gradedtest.GradedTestListener;
-import com.github.tkutche1.jgrade.gradedtest.GradedTestResult;
 
 /**
  * The {@link GradescopeListener} class is adapted from the

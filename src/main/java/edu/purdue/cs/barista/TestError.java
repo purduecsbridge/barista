@@ -1,9 +1,9 @@
 package edu.purdue.cs.barista;
 
-import org.junit.Assert;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.Assert;
 
 /**
  * The {@link TestError} class contains common methods to represent

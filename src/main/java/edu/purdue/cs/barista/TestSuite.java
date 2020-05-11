@@ -1,6 +1,8 @@
 package edu.purdue.cs.barista;
 
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
@@ -11,5 +13,6 @@ import java.lang.annotation.Target;
  * @version 1.0, 10/17/2019
  * @since 1.0
  */
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 public @interface TestSuite {}
