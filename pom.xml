@@ -10,7 +10,7 @@
 
   <name>Barista</name>
   <description>Grading package for Java Gradescope assignments.</description>
-  <url>https://github.com/pucsbridge/barista</url>
+  <url>https://github.com/purduecsbridge/barista</url>
 
   <licenses>
     <license>
@@ -21,9 +21,9 @@
   </licenses>
 
   <scm>
-    <connection>scm:git:git://github.com/pucsbridge/barista.git</connection>
-    <developerConnection>scm:git:ssh://github.com:pucsbridge/barista.git</developerConnection>
-    <url>https://github.com/pucsbridge/barista/tree/master</url>
+    <connection>scm:git:git://github.com/purduecsbridge/barista.git</connection>
+    <developerConnection>scm:git:ssh://github.com:purduecsbridge/barista.git</developerConnection>
+    <url>https://github.com/purduecsbridge/barista/tree/master</url>
   </scm>
 
   <developers>
@@ -45,14 +45,14 @@
   <distributionManagement>
     <repository>
       <id>github</id>
-      <url>https://maven.pkg.github.com/pucsbridge/barista</url>
+      <url>https://maven.pkg.github.com/purduecsbridge/barista</url>
     </repository>
   </distributionManagement>
 
   <repositories>
     <repository>
       <id>github</id>
-      <url>https://maven.pkg.github.com/pucsbridge/barista</url>
+      <url>https://maven.pkg.github.com/purduecsbridge/barista</url>
     </repository>
   </repositories>
 
