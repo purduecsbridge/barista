@@ -29,7 +29,7 @@ Want more customization? Feel free to make your own test runner and create a new
 Barista is built off of Tim Kutcher's [JGrade](https://github.com/tkutcher/jgrade), so there is even more customization to be had if you'd like to use some of JGrade's more advanced features.
 
 ## Installation
-Instructions on how to add Barista to your Maven project can be found [here](https://github.com/pucsbridge/barista/packages/).
+Instructions on how to add Barista to your Maven project can be found [here](https://github.com/purduecsbridge/barista/packages/).
 
 ## Contributing
 Pull requests/issues are always welcome.
