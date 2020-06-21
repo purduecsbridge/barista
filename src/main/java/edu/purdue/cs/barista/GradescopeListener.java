@@ -1,6 +1,5 @@
 package edu.purdue.cs.barista;
 
-import com.github.tkutche1.jgrade.gradedtest.GradedTestListener;
 import com.github.tkutche1.jgrade.gradedtest.GradedTestResult;
 
 import java.io.ByteArrayOutputStream;
@@ -8,8 +7,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
+import org.junit.runner.notification.RunListener;
 
 /**
  * The {@link GradescopeListener} class is adapted from the
@@ -18,10 +19,10 @@ import org.junit.runner.notification.Failure;
  * {@link TestSuite} classes.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.0, 10/17/2019
+ * @version 2.1, 06/21/2020
  * @since 1.0
  */
-public class GradescopeListener extends GradedTestListener {
+public class GradescopeListener extends RunListener {
 
     private final static PrintStream ORIGINAL_OUT = System.out;
 
@@ -113,18 +114,33 @@ public class GradescopeListener extends GradedTestListener {
      */
     @Override
     public void testFailure(Failure failure) {
-        if (this.currentTestResult != null) {
-            this.currentTestResult.setScore(0);
-            this.currentTestResult.addOutput("TEST FAILED:\n");
+        BeforeClass setup = failure.getDescription().getAnnotation(BeforeClass.class);
 
-            if (failure.getMessage() != null) {
-                this.currentTestResult.addOutput(failure.getMessage());
-            } else {
-                this.currentTestResult.addOutput("No description provided.");
+        // This is a setup method failure
+        if (setup == null) {
+            String testSuiteName = failure.getDescription().getTestClass().getSimpleName();
+            GradedTestResult result = new GradedTestResult(
+                testSuiteName + ": Setup",
+                "0",
+                0.0,
+                TestCase.Visibility.VISIBLE.toString()
+            );
+            result.addOutput(failure.getMessage() + "\n");
+            this.testResults.add(result);
+        } else {
+            if (this.currentTestResult != null) {
+                this.currentTestResult.setScore(0);
+                this.currentTestResult.addOutput("TEST FAILED:\n");
+
+                if (failure.getMessage() != null) {
+                    this.currentTestResult.addOutput(failure.getMessage());
+                } else {
+                    this.currentTestResult.addOutput("No description provided.");
+                }
+
+                this.currentTestResult.addOutput("\n");
+                this.currentTestResult.setPassed(false);
             }
-
-            this.currentTestResult.addOutput("\n");
-            this.currentTestResult.setPassed(false);
         }
     }
 
