@@ -1,8 +1,5 @@
 name: Build and test
-on:
-  push:
-    branches-ignore:
-      - master
+on: pull_request
 
 jobs:
   build:
