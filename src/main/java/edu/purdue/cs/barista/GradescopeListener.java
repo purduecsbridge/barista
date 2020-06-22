@@ -19,7 +19,7 @@ import org.junit.runner.notification.RunListener;
  * {@link TestSuite} classes.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.1, 06/21/2020
+ * @version 2.1.1, 06/21/2020
  * @since 1.0
  */
 public class GradescopeListener extends RunListener {
@@ -114,14 +114,14 @@ public class GradescopeListener extends RunListener {
      */
     @Override
     public void testFailure(Failure failure) {
-        BeforeClass setup = failure.getDescription().getAnnotation(BeforeClass.class);
+        TestSuite testSuite = failure.getDescription().getAnnotation(TestSuite.class);
 
-        // This is a setup method failure
-        if (setup == null) {
+        // This is a setup/teardown method failure
+        if (testSuite != null) {
             String testSuiteName = failure.getDescription().getTestClass().getSimpleName();
             GradedTestResult result = new GradedTestResult(
-                testSuiteName + ": Setup",
-                "0",
+                "INFO: " + testSuiteName,
+                "",
                 0.0,
                 TestCase.Visibility.VISIBLE.toString()
             );
