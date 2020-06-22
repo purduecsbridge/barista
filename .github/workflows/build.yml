@@ -23,6 +23,10 @@ jobs:
 
       - name: Build
         run: mvn compile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Test
         run: mvn test
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
