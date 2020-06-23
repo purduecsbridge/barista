@@ -6,7 +6,7 @@
 
   <groupId>edu.purdue.cs</groupId>
   <artifactId>barista</artifactId>
-  <version>2.1.1</version>
+  <version>3.0</version>
 
   <name>Barista</name>
   <description>Grading package for Java Gradescope assignments.</description>
@@ -37,9 +37,6 @@
   <properties>
     <!-- https://maven.apache.org/general.html#encoding-warning -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <maven.compiler.source>8</maven.compiler.source>
-    <maven.compiler.target>8</maven.compiler.target>
   </properties>
 
   <distributionManagement>
@@ -83,23 +80,23 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>3.1.1</version>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
         <configuration>
-          <finalName>${project.artifactId}-${project.version}-all</finalName>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <appendAssemblyId>false</appendAssemblyId>
+          <source>11</source>
+          <target>11</target>
         </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <links>
+            <link>https://tkutcher.gitlab.io/jgrade/api/</link>
+            <link>https://junit.org/junit4/javadoc/4.12/</link>
+          </links>
+        </configuration>
       </plugin>
     </plugins>
   </build>

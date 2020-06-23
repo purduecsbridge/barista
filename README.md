@@ -1,5 +1,8 @@
 # Barista
 
+[![build](https://img.shields.io/github/workflow/status/purduecsbridge/barista/Deploy/master)](https://github.com/purduecsbridge/barista/actions?query=workflow%3A%22Deploy%22+branch%3Amaster)
+[![javadoc](https://img.shields.io/badge/docs-javadoc-blue)](https://purduecsbridge.github.io/barista)
+
 Barista is a grading package for Java Gradescope assignments. It is meant to make the development and maintenance of programming assignments easier for courses using Java. How easy is it?
 
 ```java
