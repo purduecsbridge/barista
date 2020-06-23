@@ -7,7 +7,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.BeforeClass;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunListener;
@@ -19,7 +18,7 @@ import org.junit.runner.notification.RunListener;
  * {@link TestSuite} classes.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.1.1, 06/21/2020
+ * @version 2.1.13.0, 06/21/2020
  * @since 1.0
  */
 public class GradescopeListener extends RunListener {
@@ -29,7 +28,7 @@ public class GradescopeListener extends RunListener {
     /**
      * List of test results to pass to Gradescope.
      */
-    private ArrayList<GradedTestResult> testResults;
+    private final ArrayList<GradedTestResult> testResults;
 
     /**
      * The results of the current test being ran.
