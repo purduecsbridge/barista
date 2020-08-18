@@ -42,7 +42,7 @@ public class StringUtilitiesTest {
      */
     @Test(timeout = 1000)
     public void removeAllWhitespaceTest() {
-        final String input = "H\te\r\nll\fo";
+        final String input = "H\te\r\nl l\fo";
         final String expected = "Hello";
         final String actual = StringUtilities.removeAllWhitespace(input);
 
