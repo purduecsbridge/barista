@@ -6,7 +6,7 @@
 
   <groupId>edu.purdue.cs</groupId>
   <artifactId>barista</artifactId>
-  <version>3.0</version>
+  <version>3.1</version>
 
   <name>Barista</name>
   <description>Grading package for Java Gradescope assignments.</description>

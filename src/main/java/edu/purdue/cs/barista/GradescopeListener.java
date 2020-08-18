@@ -4,8 +4,9 @@ import com.github.tkutche1.jgrade.gradedtest.GradedTestResult;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -18,7 +19,7 @@ import org.junit.runner.notification.RunListener;
  * {@link TestSuite} classes.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.1.13.0, 06/21/2020
+ * @version 3.1, 2020-08-17
  * @since 1.0
  */
 public class GradescopeListener extends RunListener {
@@ -28,24 +29,27 @@ public class GradescopeListener extends RunListener {
     /**
      * List of test results to pass to Gradescope.
      */
-    private final ArrayList<GradedTestResult> testResults;
-
-    /**
-     * The results of the current test being ran.
-     */
-    private GradedTestResult currentTestResult;
+    private final Map<String, GradedTestResult> testResults;
 
     /**
      * The output of the current test being ran.
      */
-    private ByteArrayOutputStream currentTestOutput;
+    private final Map<String, ByteArrayOutputStream> testOutputs;
+
+    /**
+     * The maximum score for the assignment.
+     */
+    private final double maxScore;
 
     /**
      * Creates a new {@link GradescopeListener} object.
+     *
+     * @param maxScore the maximum score to scale the test cases to
      */
-    public GradescopeListener() {
-        this.testResults = new ArrayList<>();
-        this.currentTestOutput = new ByteArrayOutputStream();
+    public GradescopeListener(double maxScore) {
+        this.testResults = new HashMap<>();
+        this.testOutputs = new HashMap<>();
+        this.maxScore = maxScore;
     }
 
     /**
@@ -53,8 +57,9 @@ public class GradescopeListener extends RunListener {
      *
      * @return the list of test results
      */
-    public List<GradedTestResult> getTestResults() {
-        return this.testResults;
+    public Collection<GradedTestResult> getTestResults() {
+        scaleTestCases();
+        return this.testResults.values();
     }
 
     /**
@@ -67,22 +72,20 @@ public class GradescopeListener extends RunListener {
      */
     @Override
     public void testStarted(Description description) {
-        this.currentTestResult = null;
-
+        final String testKey = description.getDisplayName();
         TestCase testCase = description.getAnnotation(TestCase.class);
         if (testCase != null) {
-            this.currentTestResult = new GradedTestResult(
+            this.testResults.put(testKey, new GradedTestResult(
                     testCase.name(),
                     testCase.number(),
                     testCase.points(),
                     testCase.visibility().toString()
-            );
-
-            this.currentTestResult.setScore(testCase.points());
+            ));
+            this.testResults.get(testKey).setScore(testCase.points());
         }
 
-        this.currentTestOutput = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(this.currentTestOutput));
+        this.testOutputs.put(testKey, new ByteArrayOutputStream());
+        System.setOut(new PrintStream(this.testOutputs.get(testKey)));
     }
 
     /**
@@ -95,12 +98,12 @@ public class GradescopeListener extends RunListener {
      */
     @Override
     public void testFinished(Description description) {
-        if (this.currentTestResult != null) {
-            this.currentTestResult.addOutput(currentTestOutput.toString());
-            this.testResults.add(this.currentTestResult);
+        final String testKey = description.getDisplayName();
+        final String testOutput = this.testOutputs.get(testKey).toString();
+        if (this.testResults.containsKey(testKey)) {
+            this.testResults.get(testKey).addOutput(testOutput);
         }
 
-        this.currentTestResult = null;
         System.setOut(ORIGINAL_OUT);
     }
 
@@ -113,10 +116,10 @@ public class GradescopeListener extends RunListener {
      */
     @Override
     public void testFailure(Failure failure) {
-        TestSuite testSuite = failure.getDescription().getAnnotation(TestSuite.class);
+        final String testKey = failure.getDescription().getDisplayName();
 
         // This is a setup/teardown method failure
-        if (testSuite != null) {
+        if (failure.getDescription().isSuite()) {
             String testSuiteName = failure.getDescription().getTestClass().getSimpleName();
             GradedTestResult result = new GradedTestResult(
                 "INFO: " + testSuiteName,
@@ -125,22 +128,36 @@ public class GradescopeListener extends RunListener {
                 TestCase.Visibility.VISIBLE.toString()
             );
             result.addOutput(failure.getMessage() + "\n");
-            this.testResults.add(result);
+            this.testResults.put(testKey, result);
         } else {
-            if (this.currentTestResult != null) {
-                this.currentTestResult.setScore(0);
-                this.currentTestResult.addOutput("TEST FAILED:\n");
+            if (this.testResults.containsKey(testKey)) {
+                GradedTestResult result = this.testResults.get(testKey);
+                result.setScore(0);
+                result.addOutput("TEST FAILED:\n");
 
                 if (failure.getMessage() != null) {
-                    this.currentTestResult.addOutput(failure.getMessage());
+                    result.addOutput(failure.getMessage());
                 } else {
-                    this.currentTestResult.addOutput("No description provided.");
+                    result.addOutput("No description provided.");
                 }
 
-                this.currentTestResult.addOutput("\n");
-                this.currentTestResult.setPassed(false);
+                result.addOutput("\n");
+                result.setPassed(false);
             }
         }
+    }
+
+    /**
+     * Scales the test cases to the {@link GradescopeListener#maxScore}.
+     * Called when the test results are requested.
+     */
+    void scaleTestCases() {
+        final double total = this.testResults.values().stream().mapToDouble(GradedTestResult::getPoints).sum();
+        final double ratio = maxScore / total;
+        this.testResults.values().forEach(r -> {
+            r.setPoints(r.getPoints() * ratio);
+            r.setScore(r.getScore() * ratio);
+        });
     }
 
 }

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * in a given class.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.0, 10/17/2019
+ * @version 1.0, 2019-10-17
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
