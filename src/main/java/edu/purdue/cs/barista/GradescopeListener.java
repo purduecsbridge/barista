@@ -151,7 +151,7 @@ public class GradescopeListener extends RunListener {
      * Scales the test cases to the {@link GradescopeListener#maxScore}.
      * Called when the test results are requested.
      */
-    private void scaleTestCases() {
+    void scaleTestCases() {
         final double total = this.testResults.values().stream().mapToDouble(GradedTestResult::getPoints).sum();
         final double ratio = maxScore / total;
         this.testResults.values().forEach(r -> {
