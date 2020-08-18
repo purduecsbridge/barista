@@ -17,7 +17,7 @@ import org.reflections.Reflections;
  * on your configuration.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.0, 05/10/2020
+ * @version 2.0, 2020-05-10
  * @since 1.1
  */
 public final class WeightCalc {

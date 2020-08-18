@@ -14,7 +14,7 @@ import org.junit.runner.JUnitCore;
  * and print out the results.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 3.1, 08/17/2020
+ * @version 3.1, 2020-08-17
  * @since 1.0
  */
 public final class GradescopeGrader {

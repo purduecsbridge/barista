@@ -19,7 +19,7 @@ import org.junit.runner.notification.RunListener;
  * {@link TestSuite} classes.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 3.1, 08/17/2020
+ * @version 3.1, 2020-08-17
  * @since 1.0
  */
 public class GradescopeListener extends RunListener {
