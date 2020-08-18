@@ -4,6 +4,7 @@ import com.github.tkutche1.jgrade.Grader;
 import com.github.tkutche1.jgrade.gradescope.GradescopeJsonObserver;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.junit.runner.JUnitCore;
 
@@ -13,7 +14,7 @@ import org.junit.runner.JUnitCore;
  * and print out the results.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.0, 04/29/2020
+ * @version 3.1, 08/17/2020
  * @since 1.0
  */
 public final class GradescopeGrader {
@@ -31,13 +32,18 @@ public final class GradescopeGrader {
      * {@code /autograder/results/results.json} inside of a Gradescope Docker
      * container.
      *
-     * @param testSuites an array of {@link TestSuite} classes to run
+     * @param testSuites an array of classes with {@link TestCase}s to run
      * @param maxScore   the maximum total score for the given {@link TestCase}s
-     * @throws IllegalArgumentException if not all of the given classes have the {@link TestSuite} annotation
+     * @throws IllegalArgumentException if {@code maxScore} is less than 0
+     *                                  or {@code testSuites} is null or contains null elements
      */
     public static void run(Class<?>[] testSuites, double maxScore) {
-        if (!Arrays.stream(testSuites).allMatch(s -> s.isAnnotationPresent(TestSuite.class))) {
-            throw new IllegalArgumentException("All test suites must have the @TestSuite annotation.");
+        if (testSuites == null || Arrays.stream(testSuites).anyMatch(Objects::isNull)) {
+            throw new IllegalArgumentException("testSuites parameter cannot be null or contain null elements.");
+        }
+
+        if (maxScore < 0) {
+            throw new IllegalArgumentException("maxScore cannot be negative.");
         }
 
         Grader grader = new Grader();
@@ -45,7 +51,7 @@ public final class GradescopeGrader {
         GradescopeJsonObserver observer = new GradescopeJsonObserver();
         grader.attachOutputObserver(observer);
 
-        GradescopeListener listener = new GradescopeListener();
+        GradescopeListener listener = new GradescopeListener(maxScore);
 
         JUnitCore runner = new JUnitCore();
         runner.addListener(listener);
