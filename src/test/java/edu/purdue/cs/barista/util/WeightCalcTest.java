@@ -24,7 +24,7 @@ public class WeightCalcTest {
     @Test(timeout = 1000)
     public void totalsCorrectlyTest() {
         final String prefix = this.getClass().getPackage().getName();
-        Assert.assertTrue(WeightCalc.totalsCorrectly(prefix));
+        Assert.assertTrue(WeightCalc.totalsCorrectly(prefix, 100));
     }
 
     /**
