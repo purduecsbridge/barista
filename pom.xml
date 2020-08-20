@@ -23,7 +23,7 @@
   <scm>
     <connection>scm:git:git://github.com/purduecsbridge/barista.git</connection>
     <developerConnection>scm:git:ssh://github.com:purduecsbridge/barista.git</developerConnection>
-    <url>https://github.com/purduecsbridge/barista/tree/master</url>
+    <url>https://github.com/purduecsbridge/barista/tree/main</url>
   </scm>
 
   <developers>
