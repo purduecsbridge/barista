@@ -14,5 +14,5 @@ import java.lang.annotation.Target;
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
+@Target(ElementType.TYPE)
 public @interface TestSuite {}
