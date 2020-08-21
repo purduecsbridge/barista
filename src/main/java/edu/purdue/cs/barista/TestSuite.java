@@ -7,7 +7,8 @@ import java.lang.annotation.Target;
 
 /**
  * The {@link TestSuite} annotation allows Gradescope to test methods
- * in a given class.
+ * in a given class. It is not required to add this annotation to a
+ * class that contains test cases, but it is best practice to do so.
  *
  * @author Andrew Davis, drew@drewdavis.me
  * @version 1.0, 2019-10-17
