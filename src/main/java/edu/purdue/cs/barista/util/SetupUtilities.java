@@ -30,7 +30,7 @@ public final class SetupUtilities {
      * <p>
      * This method's main purpose is to determine the package name for the
      * classes you are testing when writing tests that use {@link java.lang.reflect}.
-     * <br><br><p>
+     * <br><p>
      * <b>Example:</b>
      * <p>
      * If your students are uploading Java code that rests in the {@code default}
