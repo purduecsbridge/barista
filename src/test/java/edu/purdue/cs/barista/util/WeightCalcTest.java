@@ -13,7 +13,7 @@ import java.util.Set;
  * Tests the {@link WeightCalc} class.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.1.4, 12/04/2019
+ * @version 1.1.4, 2019-12-04
  * @since 1.1.4
  */
 public class WeightCalcTest {
@@ -24,7 +24,7 @@ public class WeightCalcTest {
     @Test(timeout = 1000)
     public void totalsCorrectlyTest() {
         final String prefix = this.getClass().getPackage().getName();
-        Assert.assertTrue(WeightCalc.totalsCorrectly(prefix));
+        Assert.assertTrue(WeightCalc.totalsCorrectly(prefix, 100));
     }
 
     /**

@@ -8,39 +8,42 @@ import java.lang.annotation.Target;
 /**
  * The {@link TestCase} annotation allows test methods to be used
  * in Gradescope testing. It attaches to JUnit test methods and forwards
- * the results and the annotation parameters to Gradescope. {@link TestCase}
- * methods should be contained in a {@link TestSuite} class.
- * <p>
- * The following optional parameters may be used:
- * <ul>
- * <li>{@link String} name - the name of the test</li>
- * <li>{@link String} number - the number of the test</li>
- * <li>{@link double} maxScore - how many points the test is worth</li>
- * <li>
- *     {@link Visibility} visibility - the visibility level of the test, options for visibility are:
- *     <ul>
- *         <li>{@code VISIBLE} (default) - the test case results will always be shown to students</li>
- *         <li>{@code AFTER_PUBLISH} - the test case results will be shown after grades are published</li>
- *         <li>{@code AFTER_DUE} - the test case results will be shown after the due date has passed</li>
- *         <li>{@code HIDDEN} - the test case results will never be shown to students</li>
- *     </ul>
- * </li>
- * </ul>
+ * the results and the annotation parameters to Gradescope.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.0, 10/17/2019
+ * @version 1.0, 2019-10-17
  * @since 1.0
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target(ElementType.METHOD)
 public @interface TestCase {
 
+    /**
+     * The name of the test case.
+     *
+     * @return the name of the test case
+     */
     String name() default "Unnamed test";
 
+    /**
+     * The number of the test case. Can be used to group test cases.
+     *
+     * @return the number of the test case
+     */
     String number() default "";
 
+    /**
+     * The amount of points the test case is worth.
+     *
+     * @return the weight of the test case
+     */
     double points() default 1.0;
 
+    /**
+     * The visibility level of the test case.
+     *
+     * @return the visibility of the test case
+     */
     Visibility visibility() default Visibility.VISIBLE;
 
 
@@ -49,12 +52,28 @@ public @interface TestCase {
      * in Gradescope.
      */
     enum Visibility {
+
+        /**
+         * The test case results will always be shown to students.
+         */
         VISIBLE("visible"),
+
+        /**
+         * The test case results will be shown after grades are published.
+         */
         AFTER_PUBLISH("after_published"),
+
+        /**
+         * The test case results will be shown after the due date has passed.
+         */
         AFTER_DUE("after_due_date"),
+
+        /**
+         * The test case results will never be shown to students.
+         */
         HIDDEN("hidden");
 
-        private String visibility;
+        private final String visibility;
 
         Visibility(String visibility) {
             this.visibility = visibility;

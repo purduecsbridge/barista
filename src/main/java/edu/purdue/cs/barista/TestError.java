@@ -10,7 +10,7 @@ import org.junit.Assert;
  * common test failures.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.2.1, 12/23/2019
+ * @version 1.2.1, 2019-12-23
  * @since 1.2.1
  */
 public final class TestError {

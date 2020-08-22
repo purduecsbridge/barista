@@ -12,12 +12,11 @@ import org.reflections.Reflections;
 
 /**
  * The {@link WeightCalc} class checks that all test cases total
- * to {@code 100.0}. If the test cases do not total to {@code 100.0},
- * Gradescope could give students an incorrect grade, depending
- * on your configuration.
+ * to a given {@code maxScore}. If the test cases do not total to the max score set
+ * in Gradescope, students could be given an incorrect grade.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.0, 05/10/2020
+ * @version 3.1, 2020-05-10
  * @since 1.1
  */
 public final class WeightCalc {
@@ -35,17 +34,26 @@ public final class WeightCalc {
     }
 
     /**
-     * Checks that all {@link TestCase}s in a given package total to {@code 100.0}.
+     * Checks that all {@link TestCase}s in a given package total to a maximum score.
      * Totals test weights for {@link TestSuite} classes inside of the package given by the
      * {@code test.package.name} system property. If this property is not set,
-     * the {@code default} package is used to calculate test weights.
+     * the {@code default} package is used to calculate test weights. The maximum score is given by the
+     * {@code test.maxScore} system property. The value of {@code test.maxScore} must be a non-negative integer.
+     * If the maxScore property is not specified, 100 is used as the default.
      *
      * @param args has no effect
      */
     public static void main(String[] args) {
         String testPackage = System.getProperty("test.package.name", "");
+        int maxScore;
+        try {
+            maxScore = Integer.parseInt(System.getProperty("test.maxScore", "100"));
+            assert maxScore >= 0;
+        } catch (NumberFormatException | AssertionError e) {
+            throw new IllegalArgumentException("`test.maxScore` system property must be a non-negative integer");
+        }
 
-        if (totalsCorrectly(testPackage)) {
+        if (totalsCorrectly(testPackage, maxScore)) {
             System.out.printf("%s%s%s\n", ANSI_GREEN, SUCCESS_MESSAGE, ANSI_RESET);
             System.exit(0);
         } else {
@@ -55,15 +63,16 @@ public final class WeightCalc {
     }
 
     /**
-     * Checks that all test cases in the given package total to {@code 100.0}.
+     * Checks that all test cases in the given package total to {@code maxScore}.
      *
      * @param packageName the package to search
-     * @return {@code true} if the tests total to 100.0, {@code false} otherwise
+     * @param maxScore    the maximum score to check the total against
+     * @return {@code true} if the tests total to the maxScore, {@code false} otherwise
      */
-    static boolean totalsCorrectly(String packageName) {
+    static boolean totalsCorrectly(String packageName, double maxScore) {
         Reflections reflect = new Reflections(packageName);
         Set<Class<?>> testSuites = reflect.getTypesAnnotatedWith(TestSuite.class);
-        return calculateTotal(testSuites) == 100.0;
+        return calculateTotal(testSuites) == maxScore;
     }
 
     /**
