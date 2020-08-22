@@ -5,10 +5,10 @@ package edu.purdue.cs.barista.util;
  * test suites.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 2.0, 05/08/2020
+ * @version 2.0, 2019-05-08
  * @since 1.3
  */
-public class SetupUtilities {
+public final class SetupUtilities {
 
     /**
      * Returns the package to test. This is determined by
@@ -30,7 +30,7 @@ public class SetupUtilities {
      * <p>
      * This method's main purpose is to determine the package name for the
      * classes you are testing when writing tests that use {@link java.lang.reflect}.
-     * <br><br><p>
+     * <br><p>
      * <b>Example:</b>
      * <p>
      * If your students are uploading Java code that rests in the {@code default}

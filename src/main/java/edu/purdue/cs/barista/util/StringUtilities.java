@@ -4,7 +4,7 @@ package edu.purdue.cs.barista.util;
  * The {@link StringUtilities} class contains useful tools for testing {@link String}s.
  *
  * @author Andrew Davis, drew@drewdavis.me
- * @version 1.1.4, 10/17/2019
+ * @version 1.1.4, 2019-10-17
  * @since 1.0
  */
 public final class StringUtilities {
