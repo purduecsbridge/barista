@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Tests the {@link GradescopeListener} class.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 3.1, 2020-08-21
  * @since 3.1
  */

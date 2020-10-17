@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * in a given class. It is not required to add this annotation to a
  * class that contains test cases, but it is best practice to do so.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 1.0, 2019-10-17
  * @since 1.0
  */

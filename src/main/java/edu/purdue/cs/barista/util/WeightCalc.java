@@ -15,7 +15,7 @@ import org.reflections.Reflections;
  * to a given {@code maxScore}. If the test cases do not total to the max score set
  * in Gradescope, students could be given an incorrect grade.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 3.1, 2020-05-10
  * @since 1.1
  */

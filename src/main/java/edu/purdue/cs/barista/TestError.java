@@ -9,7 +9,7 @@ import org.junit.Assert;
  * The {@link TestError} class contains common methods to represent
  * common test failures.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 1.2.1, 2019-12-23
  * @since 1.2.1
  */

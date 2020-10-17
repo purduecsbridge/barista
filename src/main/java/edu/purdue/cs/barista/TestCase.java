@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
  * in Gradescope testing. It attaches to JUnit test methods and forwards
  * the results and the annotation parameters to Gradescope.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 1.0, 2019-10-17
  * @since 1.0
  */

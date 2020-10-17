@@ -18,7 +18,7 @@ import org.junit.runner.notification.RunListener;
  * Modifications have been made such that the {@link TestCase} annotation can be used in
  * {@link TestSuite} classes.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 3.1, 2020-08-17
  * @since 1.0
  */

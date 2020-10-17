@@ -4,7 +4,7 @@ package edu.purdue.cs.barista.util;
  * The {@link SetupUtilities} class contains useful tools for setting up
  * test suites.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 2.0, 2019-05-08
  * @since 1.3
  */
