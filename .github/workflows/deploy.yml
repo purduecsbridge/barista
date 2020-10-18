@@ -62,7 +62,7 @@ jobs:
 
       - name: Push tag
         run: |
-          git tag $curr_version origin/${{ github.ref }}
+          git tag $curr_version origin/main
           git push origin $curr_version
 
   javadoc:
