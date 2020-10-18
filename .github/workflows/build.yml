@@ -38,11 +38,11 @@ jobs:
           curr_version=$($check_ver)
 
           # Get last built version
-          git checkout - -q
+          git checkout ${{ github.base_ref }} -q
           last_version=$($check_ver)
-          git switch - -q
+          git checkout ${{ github.head_ref }} -q
 
-          # Gets function number from
+          # Check if version was bumped
           if ! dpkg --compare-versions $curr_version "gt" $last_version; then
               printf "Please bump the version number in the POM: expected >%s\n" $last_version
               exit 1
