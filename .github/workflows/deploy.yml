@@ -63,8 +63,8 @@ jobs:
       - name: Push tag
         run: |
           git fetch -q
-          git tag $curr_version origin/main
-          git push origin $curr_version
+          git tag "v$curr_version" origin/main
+          git push origin "v$curr_version"
 
   javadoc:
     runs-on: ubuntu-latest
