@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Tests the {@link StringUtilities} class.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 1.1.4, 2019-12-04
  * @since 1.1.4
  */

@@ -6,17 +6,20 @@
 Barista is a grading package for Java Gradescope assignments. It is meant to make the development and maintenance of programming assignments easier for courses using Java. How easy is it?
 
 ```java
+import org.junit.Test;
 import edu.purdue.cs.barista.TestCase;
 import edu.purdue.cs.barista.TestSuite;
 
 @TestSuite
 public class HelloWorldTests {
 
+  @Test
   @TestCase(name = "Hello test", points = 50.0)
   public void testHello() {
     // Test code here
   }
   
+  @Test
   @TestCase(name = "Goodbye test", points = 50.0)
   public void testGoodbye() {
     // Test code here

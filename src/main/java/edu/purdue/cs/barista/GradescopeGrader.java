@@ -13,7 +13,7 @@ import org.junit.runner.JUnitCore;
  * The {@link GradescopeGrader#run} method will run a set of {@link TestSuite} classes
  * and print out the results.
  *
- * @author Andrew Davis, drew@drewdavis.me
+ * @author Andrew Davis, asd@alumni.purdue.edu
  * @version 3.1, 2020-08-17
  * @since 1.0
  */

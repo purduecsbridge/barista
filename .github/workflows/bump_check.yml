@@ -1,0 +1,50 @@
+name: Check for version bump
+on:
+  pull_request:
+    branches:
+        main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Setup JDK and Maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Load Maven repository from cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Get current version
+        run: |
+          check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+          curr_version=$($check_ver)
+          echo "curr_version=$curr_version" >> $GITHUB_ENV
+
+      - name: Checkout main
+        uses: actions/checkout@v2
+        with:
+          ref: 'main'
+
+      - name: Get last version
+        run: |
+          check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+          last_version=$($check_ver)
+          echo "last_version=$last_version" >> $GITHUB_ENV
+
+      - name: Check version bump
+        run: |
+          if ! dpkg --compare-versions $curr_version "gt" $last_version; then
+              printf "Please bump the version number in the POM: expected >%s\n" $last_version
+              exit 1
+          fi
+
