@@ -28,7 +28,7 @@ jobs:
         run: |
           check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
           curr_version=$($check_ver)
-          echo "::set-env name=curr_version::$curr_version"
+          echo "curr_version=$curr_version" >> $GITHUB_ENV
 
       - name: Checkout main
         uses: actions/checkout@v2
@@ -39,12 +39,12 @@ jobs:
         run: |
           check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
           last_version=$($check_ver)
-          echo "::set-env name=last_version::$last_version"
+          echo "last_version=$last_version" >> $GITHUB_ENV
 
       - name: Check version bump
         run: |
           if ! dpkg --compare-versions $curr_version "gt" $last_version; then
-              printf "Please bump the version number in the POM: expected >%s\n" ${{ env.last_version }}
+              printf "Please bump the version number in the POM: expected >%s\n" $last_version
               exit 1
           fi
 
