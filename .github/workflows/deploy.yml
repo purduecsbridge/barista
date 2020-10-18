@@ -34,6 +34,37 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+  tag:
+    runs-on: ubuntu-latest
+    needs: package
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup JDK and Maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Load Maven repository from cache
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Get current version
+        run: |
+          check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+          curr_version=$($check_ver)
+          echo "curr_version=$curr_version" >> $GITHUB_ENV
+
+      - name: Push tag
+        run: |
+          git tag $curr_version origin/${{ github.ref }}
+          git push origin $curr_version
+
   javadoc:
     runs-on: ubuntu-latest
     needs: package
