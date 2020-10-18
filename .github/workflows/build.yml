@@ -38,9 +38,11 @@ jobs:
           curr_version=$($check_ver)
 
           # Get last built version
-          git checkout ${{ github.base_ref }} -q
+          git remote update
+          git fetch
+          git checkout origin/${{ github.base_ref }} -q
           last_version=$($check_ver)
-          git checkout ${{ github.head_ref }} -q
+          git checkout origin/${{ github.head_ref }} -q
 
           # Check if version was bumped
           if ! dpkg --compare-versions $curr_version "gt" $last_version; then
