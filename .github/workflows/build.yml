@@ -30,3 +30,21 @@ jobs:
         run: mvn test
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check version bump
+        run: |
+          # Get current version
+          check_ver="mvn help:evaluate -Dexpression=project.version -q -DforceStdout"
+          curr_version=$($check_ver)
+
+          # Get last built version
+          git checkout - -q
+          last_version=$($check_ver)
+          git switch - -q
+
+          # Gets function number from
+          if ! dpkg --compare-versions $curr_version "gt" $last_version; then
+              printf "Please bump the version number in the POM: expected >%s\n" $last_version
+              exit 1
+          fi
+
