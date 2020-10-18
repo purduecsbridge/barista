@@ -38,8 +38,7 @@ jobs:
           curr_version=$($check_ver)
 
           # Get last built version
-          git remote update
-          git fetch
+          git fetch -q
           git checkout origin/${{ github.base_ref }} -q
           last_version=$($check_ver)
           git checkout origin/${{ github.head_ref }} -q
