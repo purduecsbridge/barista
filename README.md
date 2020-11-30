@@ -1,5 +1,7 @@
 # Barista
 
+##### Note: This project has been retired. [Percolator](https://github.com/purduecsbridge/percolator) is a new grading framework that builds off of Barista's best aspects, while adding new functionality. Barista will continue to be hosted here, but will no longer receive updates. See [#18](https://github.com/purduecsbridge/barista/issues/18) for more information.
+
 [![build](https://img.shields.io/github/workflow/status/purduecsbridge/barista/Deploy/main)](https://github.com/purduecsbridge/barista/actions?query=workflow%3A%22Deploy%22+branch%3Amain)
 [![javadoc](https://img.shields.io/badge/docs-javadoc-blue)](https://purduecsbridge.github.io/barista)
 
